@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<!-- coding by Big top up for 
+contact: +50934289362 
+mail: rayphilibert840@gmail
+country: haïti -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>freefire/shop/Big topup</title>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("https://timeapi.io/api/Time/current/zone?timeZone=America/Port-au-Prince")
+        .then(response => {
+          if (!response.ok) throw new Error("Erreur réseau");
+          return response.json();
+        })
+        .then(data => {
+          const hour = data.hour;
+          const day = new Date(data.dateTime).getDay(); // 0 = dimanche, ..., 6 = samedi
+
+          let openHour, closeHour;
+
+          if (day === 0 || day === 6) {
+            // Samedi & Dimanche
+            openHour = 9;
+            closeHour = 24;
+          } else {
+            // Lundi à Vendredi
+            openHour = 8;
+            closeHour = 24;
+          }
+
+          if (hour < openHour || hour >= closeHour) {
+            window.location.href = "ferme.html";
+          }
+        })
+        .catch(error => {
+          console.error("Erreur lors de la récupération de l'heure :", error);
+// Optionnel : rediriger en cas d'erreur d'API
+          // window.location.href = "ferme.html";
+        });
+    });
+  </script>
+<style>
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
+
+   <style>
+
+    .ayyyyy {
+      display: none;
+      padding: 50px;
+      text-align: center;
+    }
+ select {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 2px solid #0077b6;
+      border-radius: 6px;
+      background-color: #e0f7ff;
+      color: #000;
+    }
+.ffshop{
+	text-align: center;
+}
+p{
+  margin: 10px 0 20px 0;
+  color: var(--secondary-text);
+}
+.button1{
+  border: none;
+  padding: .8em 2em;
+  background-color: var(--primary-color);
+  color: white;
+  position: fixed;
+  border-radius: 4px;
+  font: inherit;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+}
+.cta-button{
+  background-color: var(--accent-color);
+}
+#theme-switch{
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--base-variant);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: +400px;
+  right: 20px;
+}
+#theme-switch svg{
+  fill: var(--primary-color);
+}
+#theme-switch svg:last-child{
+  display: none;
+}
+.darkmode #theme-switch svg:first-child{
+  display: none;
+}
+.darkmode #theme-switch svg:last-child{
+  display: block;
+}
+i{
+	text-decoration: none;
+	display: inline-block;
+	color: var(--secondary-text);
+}
+.link ul li a{
+	color:var(--secondary-text);
+	text-decoration: none;
+	display: inline-block;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 270px;
+  height: 100vh;
+  background: #151A2D;
+  transition: all 0.4s ease;
+}
+
+.sidebar.collapsed {
+  width: 85px;
+}
+
+.sidebar .sidebar-header {
+  display: flex;
+  position: relative;
+  padding: 25px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-header .header-logo img {
+  width: 46px;
+  height: 46px;
+  display: block;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.sidebar-header .sidebar-toggler,
+.sidebar-menu-button {
+  position: absolute;
+  right: 20px;
+  height: 35px;
+  width: 35px;
+  color: #151A2D;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  background: #EEF2FF;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: 0.4s ease;
+}
+
+.sidebar.collapsed .sidebar-header .sidebar-toggler {
+  transform: translate(-4px, 65px);
+}
+
+.sidebar-header .sidebar-toggler span,
+.sidebar-menu-button span {
+  font-size: 1.75rem;
+  transition: 0.4s ease;
+}
+
+.sidebar.collapsed .sidebar-header .sidebar-toggler span {
+  transform: rotate(180deg);
+}
+
+.sidebar-header .sidebar-toggler:hover {
+  background: #d9e1fd;
+}
+
+.sidebar-nav .nav-list {
+  list-style: none;
+  display: flex;
+  gap: 4px;
+  padding: 0 15px;
+  flex-direction: column;
+  transform: translateY(15px);
+  transition: 0.4s ease;
+}
+
+.sidebar .sidebar-nav .primary-nav {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-bottom: 20px;
+  height: calc(100vh - 227px);
+  scrollbar-color: transparent transparent;
+}
+
+.sidebar .sidebar-nav .primary-nav:hover {
+  scrollbar-color: #EEF2FF transparent;
+}
+
+.sidebar.collapsed .sidebar-nav .primary-nav {
+  overflow: unset;
+  transform: translateY(65px);
+}
+  .radio-group {
+      display: flex;
+      align-items: center;
+		margin-top: 20px;
+    }
+
+    .radio-option {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"] {
+      display: none;
+    }
+
+    .radio-option label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 2px solid transparent;
+      padding: 10px;
+      border-radius: 10px;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    .radio-option input[type="radio"]:checked + label {
+      border-color: #28a745;
+      background-color: #eaffea;
+    }
+
+    .radio-option img {
+      width: 100px;
+      height: 40px;
+      margin-bottom: 5px;
+    }
+.sidebar-nav .nav-item .nav-link {
+  color: #fff;
+  display: flex;
+  gap: 12px;
+  white-space: nowrap;
+  border-radius: 8px;
+  padding: 11px 15px;
+  align-items: center;
+  text-decoration: none;
+  border: 1px solid #151A2D;
+  transition: 0.4s ease;
+}
+
+.sidebar-nav .nav-item:is(:hover, .open)>.nav-link:not(.dropdown-title) {
+  color: #151A2D;
+  background: #EEF2FF;
+}
+
+.sidebar .nav-link .nav-label {
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed .nav-link :where(.nav-label, .dropdown-icon) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar.collapsed .nav-link .dropdown-icon {
+  transition: opacity 0.3s 0s ease;
+}
+
+.sidebar-nav .secondary-nav {
+  position: absolute;
+  bottom: 35px;
+  width: 100%;
+  background: #151A2D;
+}
+
+.sidebar-nav .nav-item {
+  position: relative;
+}
+
+/* Dropdown Stylings */
+.sidebar-nav .dropdown-container .dropdown-icon {
+  margin: 0 -4px 0 auto;
+  transition: transform 0.4s ease, opacity 0.3s 0.2s ease;
+}
+
+.sidebar-nav .dropdown-container.open .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.sidebar-nav .dropdown-menu {
+  height: 0;
+  overflow-y: hidden;
+  list-style: none;
+  padding-left: 15px;
+  transition: height 0.4s ease;
+}
+
+.sidebar.collapsed .dropdown-menu {
+  position: absolute;
+  top: -10px;
+  left: 100%;
+  opacity: 0;
+  height: auto !important;
+  padding-right: 10px;
+  overflow-y: unset;
+  pointer-events: none;
+  border-radius: 0 10px 10px 0;
+  background: #151A2D;
+  transition: 0s;
+}
+
+.sidebar.collapsed .dropdown-menu:has(.dropdown-link) {
+  padding: 7px 10px 7px 24px;
+}
+
+.sidebar.sidebar.collapsed .nav-item:hover>.dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(12px);
+  transition: all 0.4s ease;
+}
+
+.sidebar.sidebar.collapsed .nav-item:hover>.dropdown-menu:has(.dropdown-link) {
+  transform: translateY(10px);
+}
+
+.dropdown-menu .nav-item .nav-link {
+  color: #F1F4FF;
+  padding: 9px 15px;
+}
+
+.sidebar.collapsed .dropdown-menu .nav-link {
+  padding: 7px 15px;
+}
+
+.dropdown-menu .nav-item .nav-link.dropdown-title {
+  display: none;
+  color: #fff;
+  padding: 9px 15px;
+}
+
+.dropdown-menu:has(.dropdown-link) .nav-item .dropdown-title {
+  font-weight: 500;
+  padding: 7px 15px;
+}
+
+.sidebar.collapsed .dropdown-menu .nav-item .dropdown-title {
+  display: block;
+}
+
+.sidebar-menu-button {
+  display: none;
+}
+
+/* Responsive media query code for small screens */
+@media (max-width: 768px) {
+  .sidebar-menu-button {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    height: 40px;
+    width: 42px;
+    display: flex;
+    color: #F1F4FF;
+    background: #151A2D;
+  }
+
+  .sidebar.collapsed {
+    width: 270px;
+    left: -270px;
+  }
+
+  .sidebar.collapsed .sidebar-header .sidebar-toggler {
+    transform: none;
+  }
+
+  .sidebar.collapsed .sidebar-nav .primary-nav {
+    transform: translateY(15px);
+  }
+}
+
+:root{
+  --base-color: white;
+  --base-variant: #e8e9ed;
+  --text-color: #111528;
+  --secondary-text: #232738;
+  --primary-color: #3a435d;
+  --accent-color: #0071ff;
+}
+
+.darkmode{
+  --base-color: #070b1d;
+  --base-variant: #101425;
+  --text-color: #ffffff;
+  --secondary-text: #a4a5b8;
+  --primary-color: #3a435d;
+  --accent-color: #0071ff;
+}
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+	  box-sizing: border-box;
+
+
+}
+html{
+  font-family: Poppins;
+}
+body{
+
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  background-color: var(--base-variant);
+    font-family: "Poppins", sans-serif;
+	  box-sizing: border-box;
+}
+.logo-Big{
+	width: 60px;
+	border-radius: 15px;
+	position: relative;
+	left: 300px;
+	top: +20px;
+	font-family: "Sigmar", sans-serif;
+}
+header, section{
+  
+}
+section{
+  background-color: var(--base-variant);
+}
+label{
+	display: block;
+	text-align: left;
+	color: var(--secondary-text);
+	margin-left: 35px;
+	font-style: italic;
+	margin-top:20px;
+}
+   .custom-file-upload {
+      display: inline-block;
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #28a745; /* vert */
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      border: none;
+		width: 80%;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+
+
+
+</style>
+
+
+    <!-- Linking Google Fonts for Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  </head>
+  <body>
+<button id="theme-switch" class="button1">
+      <svg file="color:red" xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+    </button>
+    <!-- Mobile Sidebar Menu Button -->
+    <button class="sidebar-menu-button">
+      <span class="material-symbols-rounded">menu</span>
+
+    </button>
+    <aside class="sidebar">
+      <!-- Sidebar Header -->
+      <header class="sidebar-header">
+        <a href="index.html" class="header-logo">
+          <img src="https://files.catbox.moe/50yh0r.jpeg" alt="Bigtopup" />
+        </a>
+        <button class="sidebar-toggler">
+          <span class="material-symbols-rounded">chevron_left</span>
+        </button>
+      </header>
+
+      <nav class="sidebar-nav">
+        <!-- Primary Top Nav -->
+        <ul class="nav-list primary-nav">
+<li class="nav-item">
+            <a href="index.html" class="nav-link">
+              <span class="material-symbols-rounded">home</span>
+              <span class="nav-label">home</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">home</a></li>
+            </ul>
+          </li>
+          <!-- Dropdown -->
+          <li class="nav-item dropdown-container">
+            <a href="#" class="nav-link dropdown-toggle">
+              <span class="material-symbols-rounded">calendar_today</span>
+              <span class="nav-label">Services</span>
+              <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+            </a>
+
+            <!-- Dropdown Menu -->
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Services</a></li>
+              <li class="nav-item"><a href="freefireshop.html" class="nav-link dropdown-link">Free fire</a></li>
+		 <li class="nav-item"><a href="freefireshop.html" class="nav-link dropdown-link">netflix</a></li>
+		 <li class="nav-item"><a href="freefireshop.html" class="nav-link dropdown-link">crunchyroll</a></li>
+              <li class="nav-item"><a href="#" class="nav-link dropdown-link">carte apple</a></li>
+              <li class="nav-item"><a href="#" class="nav-link dropdown-link">Paypall</a></li>
+            </ul>
+          </li>
+
+          <!-- Dropdown -->
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">phone</span>
+              <span class="nav-label">contact</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">contact</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">class</span>
+              <span class="nav-label">FAQ</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">faq</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Secondary Bottom Nav -->
+        <ul class="nav-list secondary-nav">
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">help</span>
+              <span class="nav-label">Support</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Support</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="material-symbols-rounded">logout</span>
+              <span class="nav-label">Sign Out</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link dropdown-title">Sign Out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+<div class="logo">
+<a href="index.html"><img src="https://files.catbox.moe/50yh0r.jpeg" class="logo-Big"></a><br><br>
+
+
+
+<div class="paiement-info" style="border: 2px solid var(--secondary-text);margin-top:100px;margin-left:20px;margin-right:20px;border-radius:5px;">
+<h2 style="text-align:center;color: var(--secondary-text)"><b>Info paiement</b></h2>
+<form class="telegram-sub">
+<label for="nom-client"><b>Nom Complet</b></label>
+
+<input style="width:80%;height:40px;margin-left:35px;" type="text" id="nom-client" placeholder="Votre Nom Complet Svp ex: Jhon" name="nom-client"/>
+
+<label for="nom-client"><b>Numero de Telephone</b></label>
+<input style="width:80%;height:40px;margin-left:35px;" type="tel" id="Numero-client" placeholder="Votre Numero Svp ex: 509xxxxxxxx" name="Numero-client"/>
+<p id="numero-error" style="color:red;margin-left:35px;font-size:14px;"></p>
+
+
+<label for="email-client"><b>E-mail</b></label>
+<input style="width:80%;height:40px;margin-left:35px;" type="email" id="E-mail-client" placeholder="Votre E-mail ex: Haitiantopup@gmail.com" name="E-mail-client" />
+<p id="email-error" style="color:red;margin-left:35px;font-size:14px;"></p>
+
+
+
+  <label for="pays"><b>pays/region </b></label>
+  <select style="margin-left:35px;border-radius: 5px;width:80%;height:40px;" name="pays" id="pays" >
+    <option value="">-- Choisissez un pays --</option>
+    <option value="AF">Afghanistan</option>
+    <option value="ZA">Afrique du Sud</option>
+    <option value="AL">Albanie</option>
+    <option value="DZ">Algérie</option>
+    <option value="DE">Allemagne</option>
+    <option value="AD">Andorre</option>
+    <option value="AO">Angola</option>
+    <option value="AI">Anguilla</option>
+    <option value="AQ">Antarctique</option>
+    <option value="AG">Antigua-et-Barbuda</option>
+    <option value="SA">Arabie saoudite</option>
+    <option value="AR">Argentine</option>
+    <option value="AM">Arménie</option>
+    <option value="AU">Australie</option>
+    <option value="AT">Autriche</option>
+    <option value="AZ">Azerbaïdjan</option>
+    <option value="BS">Bahamas</option>
+    <option value="BH">Bahreïn</option>
+    <option value="BD">Bangladesh</option>
+    <option value="BB">Barbade</option>
+    <option value="BY">Biélorussie</option>
+    <option value="BE">Belgique</option>
+    <option value="BZ">Belize</option>
+    <option value="BJ">Bénin</option>
+    <option value="BM">Bermudes</option>
+    <option value="BT">Bhoutan</option>
+    <option value="BO">Bolivie</option>
+    <option value="BA">Bosnie-Herzégovine</option>
+    <option value="BW">Botswana</option>
+    <option value="BR">Brésil</option>
+    <option value="IO">Territoire britannique de l'océan Indien</option>
+    <option value="BN">Brunei Darussalam</option>
+    <option value="BG">Bulgarie</option>
+    <option value="BF">Burkina Faso</option>
+    <option value="BI">Burundi</option>
+    <option value="KH">Cambodge</option>
+    <option value="CM">Cameroun</option>
+    <option value="CA">Canada</option>
+    <option value="CV">Cap-Vert</option>
+    <option value="KY">Îles Caïmans</option>
+    <option value="CF">République centrafricaine</option>
+    <option value="TD">Tchad</option>
+    <option value="CL">Chili</option>
+    <option value="CN">Chine</option>
+    <option value="CX">Île Christmas</option>
+    <option value="CC">Îles Cocos</option>
+    <option value="CO">Colombie</option>
+    <option value="KM">Comores</option>
+    <option value="CG">Congo</option>
+    <option value="CD">République démocratique du Congo</option>
+    <option value="CK">Îles Cook</option>
+    <option value="CR">Costa Rica</option>
+    <option value="CI">Côte d'Ivoire</option>
+    <option value="HR">Croatie</option>
+    <option value="CU">Cuba</option>
+    <option value="CW">Curaçao</option>
+    <option value="CY">Chypre</option>
+    <option value="CZ">République tchèque</option>
+    <option value="DK">Danemark</option>
+    <option value="DJ">Djibouti</option>
+    <option value="DM">Dominique</option>
+    <option value="DO">République dominicaine</option>
+    <option value="EC">Équateur</option>
+    <option value="EG">Égypte</option>
+    <option value="SV">Salvador</option>
+    <option value="GQ">Guinée équatoriale</option>
+    <option value="ER">Érythrée</option>
+    <option value="EE">Estonie</option>
+    <option value="ET">Éthiopie</option>
+    <option value="FK">Îles Malouines</option>
+    <option value="FO">Îles Féroé</option>
+    <option value="FJ">Fidji</option>
+    <option value="FI">Finlande</option>
+    <option value="FR">France</option>
+    <option value="GF">Guyane française</option>
+    <option value="PF">Polynésie française</option>
+    <option value="GA">Gabon</option>
+    <option value="GM">Gambie</option>
+    <option value="GE">Géorgie</option>
+    <option value="DE">Allemagne</option>
+    <option value="GH">Ghana</option>
+    <option value="GI">Gibraltar</option>
+    <option value="GR">Grèce</option>
+    <option value="GL">Groenland</option>
+    <option value="GD">Grenade</option>
+    <option value="GP">Guadeloupe</option>
+    <option value="GU">Guam</option>
+    <option value="GT">Guatemala</option>
+    <option value="GG">Guernesey</option>
+    <option value="GN">Guinée</option>
+    <option value="GW">Guinée-Bissau</option>
+    <option value="GY">Guyana</option>
+    <option value="HT">Haïti</option>
+    <option value="HM">Îles Heard-et-MacDonald</option>
+    <option value="VA">Vatican</option>
+    <option value="HN">Honduras</option>
+    <option value="HK">Hong Kong</option>
+    <option value="HU">Hongrie</option>
+    <option value="IS">Islande</option>
+    <option value="IN">Inde</option>
+    <option value="ID">Indonésie</option>
+    <option value="IR">Iran</option>
+    <option value="IQ">Irak</option>
+    <option value="IE">Irlande</option>
+    <option value="IM">Île de Man</option>
+    <option value="IL">Israël</option>
+    <option value="IT">Italie</option>
+</select>
+<label for="file-upload"><b>Photo (facultif)</b></label>
+ <label for="file-upload" class="custom-file-upload">
+    FOTO TRANSFÈ A
+  </label>
+  <input id="file-upload" type="file" name="photo"/>
+<label ><b>Mode de paiement</b></label>
+<div style=";" class="radio-group">
+
+    <div class="radio-option">
+      <input type="radio" id="moncash" name="paiement" value="moncash">
+      <label for="moncash">
+        <img src="https://files.catbox.moe/aktvxl.png" alt="Mon Cash">
+        Mon Cash
+      </label>
+    </div>
+
+    <div class="radio-option">
+      <input type="radio" id="natcash" name="paiement" value="natcash">
+      <label for="natcash">
+        <img src="https://files.catbox.moe/qa3rga.png" alt="Natcash">
+        Natcash
+      </label>
+    </div>
+  </div>
+</div>
+</div>
+<br>
+<div style="margin-left:20px;margin-right:20px;margin-top:20px;border: 2px solid var(--secondary-text); border-radius: 5px;" class="If-333" id="If-333">
+</div>
+<div style="margin-left:20px;margin-right:20px;margin-top:20px;border: 2px solid var(--secondary-text); border-radius: 5px;" class="btn-8383">
+<h2 style="font-style:italic;color:var(--secondary-text);text-align:center;">Nos numeros de paiement:</h2><br>
+<h3 style="color:var(--secondary-text);">
+<table border=2 color=red style="border: 5px solid green;">
+	<tr> 
+		<th>Mode de paiement</th>
+		<th>Nom</th>
+		<th>numero</th>
+	</tr>
+	<tr> 
+		<td>Mon cash</td>
+		<td>Sophonie Antenor</td>
+		<td>+509 3940-5677</td>
+	</tr>
+	<tr> 
+		<td>Nat cash</td>
+		<td>Jean woodlensky</td>
+		<td>+5094272-1260</td>
+	</tr>
+</table><br><br>
+</h3>
+<!--<button type="submit" style="margin-left:90px;background-color: green;width:50%;height:30px;border-radius:7px;margin-top:30px;" onclick="startLoader()">Commander</button>-->
+<div id="form-message" style="color: red; margin-bottom: 10px;"></div>
+<button id="commande-btn" type="submit" style="margin-left:90px;background-color: green;width:50%;height:30px;border-radius:7px;margin-top:30px;" onclick="startLoader()">Commander</button>
+
+</div>
+
+<div id="form-message" style="display:none; color: white; background-color: red; padding: 10px; margin: 20px 35px; border-radius: 5px;"></div>
+
+
+
+</form>
+
+<div id="spinner" class="spinner" style="display:none;"></div>
+
+
+
+
+<!--<div class="link" style="margin: 45px;">
+<h3 style="color:red">link</h3>
+<ul>
+	<li><a href="freefireshop.html">free fire</a></li>
+	<li><a href="#">carte apple</a></li>
+	<li><a href="#">crunchyroll</a></li>
+	<li><a href="#">paypall</a></li>
+	<li><a href="404.html">netflix</a></li>
+<h3 style="color:red">visit</h3>
+	<li><a href="#">a propos</a></li>
+	<li><a href="index.html">home</a></li>
+	<li><a href="#">services</a></li>
+	<li><a href="#">contact</a></li>
+	
+	<h3 style="color:red">media</h3>
+	<a href="#"><i class='bx bxl-youtube'></i></a></li>
+	<a href="#"><i class='bx bxl-tiktok' ></i></a></li>
+	<a href="#"><i class='bx bxl-instagram' ></i></a></li>
+	
+</ul>
+</div>
+<h3 style="color:var(--secondary-text);text-align:center;font-style:italic;">
+Big top up 
+&copy tout droits reservés aux 𝐆𝐎𝐃 <h3><br>-->
+
+
+<script>
+// Toggle the visibility of a dropdown menu
+const toggleDropdown = (dropdown, menu, isOpen) => {
+  dropdown.classList.toggle("open", isOpen);
+  menu.style.height = isOpen ? `${menu.scrollHeight}px` : 0;
+};
+
+// Close all open dropdowns
+const closeAllDropdowns = () => {
+  document.querySelectorAll(".dropdown-container.open").forEach((openDropdown) => {
+    toggleDropdown(openDropdown, openDropdown.querySelector(".dropdown-menu"), false);
+  });
+};
+
+// Attach click event to all dropdown toggles
+document.querySelectorAll(".dropdown-toggle").forEach((dropdownToggle) => {
+  dropdownToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const dropdown = dropdownToggle.closest(".dropdown-container");
+    const menu = dropdown.querySelector(".dropdown-menu");
+    const isOpen = dropdown.classList.contains("open");
+
+    closeAllDropdowns(); // Close all open dropdowns
+    toggleDropdown(dropdown, menu, !isOpen); // Toggle current dropdown visibility
+  });
+});
+
+// Attach click event to sidebar toggle buttons
+document.querySelectorAll(".sidebar-toggler, .sidebar-menu-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    closeAllDropdowns(); // Close all open dropdowns
+    document.querySelector(".sidebar").classList.toggle("collapsed"); // Toggle collapsed class on sidebar
+  });
+});
+
+// Collapse sidebar by default on small screens
+if (window.innerWidth <= 1024) document.querySelector(".sidebar").classList.add("collapsed");
+let darkmode = localStorage.getItem('darkmode')
+const themeSwitch = document.getElementById('theme-switch')
+
+const enableDarkmode = () => {
+  document.body.classList.add('darkmode')
+  localStorage.setItem('darkmode', 'active')
+}
+
+const disableDarkmode = () => {
+  document.body.classList.remove('darkmode')
+  localStorage.setItem('darkmode', null)
+}
+
+if(darkmode === "active") enableDarkmode()
+
+themeSwitch.addEventListener("click", () => {
+  darkmode = localStorage.getItem('darkmode')
+  darkmode !== "active" ? enableDarkmode() : disableDarkmode()
+});
+</script>
+
+
+<script>
+  function getParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  const panierData = getParam("panier");
+  const total = getParam("total");
+
+  if (panierData && total) {
+    try {
+      const panier = JSON.parse(decodeURIComponent(panierData));
+      const container = document.getElementById("If-333");
+      let html = `
+        <h3 style="text-align:center; color: var(--secondary-text);"><b>order information</b></h3>
+        <ul style="color: var(--secondary-text); font-size: 16px;">`;
+
+      panier.forEach(item => {
+        html += `
+          <li style="margin-bottom:10px;">
+            ${item.packText} × ${item.quantite} = <b>${item.total} GDS</b><br>
+            UID Joueur : <b>${item.uid}</b>
+          </li>`;
+      });
+
+      html += `</ul>
+        <div style="font-size:18px; font-weight:bold; margin-top:15px; color: var(--secondary-text);">
+          Total Général : ${total} GDS
+        </div>`;
+
+      container.innerHTML = html;
+    } catch (error) {
+      console.error("Erreur lors de l’analyse du panier :", error);
+    }
+  } else {
+    console.warn("Aucune donnée de panier reçue.");
+  }
+</script>
+<script>
+document.querySelector(".telegram-sub").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const btn = document.getElementById("commande-btn");
+  const spinner = document.getElementById("spinner");
+  const messageDiv = document.getElementById("form-message");
+
+  // Réinitialiser message
+  messageDiv.innerText = "";
+  messageDiv.style.color = "red";
+
+  const nom = document.getElementById("nom-client").value.trim();
+  const numero = document.getElementById("Numero-client").value.trim();
+  const email = document.getElementById("E-mail-client").value.trim();
+  const paysSelect = document.getElementById("pays");
+  const paysNom = paysSelect.options[paysSelect.selectedIndex].text;
+  const modePaiementInput = document.querySelector('input[name="paiement"]:checked');
+  const infoDiv = document.getElementById("If-333").innerText.trim() || "Aucune info supplémentaire";
+  const photoInput = document.getElementById("file-upload");
+
+  let hasError = false;
+
+  if (!email.includes('@gmail.com')) {
+    messageDiv.innerText = "L'e-mail doit contenir @gmail.com";
+    hasError = true;
+  } else if (!/^\d{8,}$/.test(numero)) {
+    messageDiv.innerText = "Le numéro doit contenir au moins 8 chiffres";
+    hasError = true;
+  } else if (!nom || !numero || !email || paysSelect.value === "" || !modePaiementInput) {
+    messageDiv.innerText = "Veuillez remplir tous les champs requis.";
+    hasError = true;
+  } else if (photoInput.files.length === 0) {
+    messageDiv.innerText = "Veuillez sélectionner une photo de preuve.";
+    hasError = true;
+  }
+
+  if (hasError) return;
+
+  // Spinner et désactivation du bouton
+  btn.disabled = true;
+  btn.style.opacity = 0.6;
+  spinner.style.display = "block";
+
+  const modePaiement = modePaiementInput.value;
+  const now = new Date();
+  const datePart = now.toISOString().slice(0, 10).replace(/-/g, '');
+  const randomPart = Math.floor(1000 + Math.random() * 9000);
+  const commandeID = `CMD-${datePart}-${randomPart}`;
+
+  const caption = `Nouvelle commande ${commandeID}
+Nom : ${nom}
+Téléphone : ${numero}
+Email : ${email}
+Pays : ${paysNom}
+Mode de paiement : ${modePaiement}
+Infos supplémentaires : ${infoDiv}`;
+
+  const token = "7800844118:AAEhb1yqkSL0uUI1SbdDN3N9Z1a2Tb0A9nI";
+  const chatId = "6467041463";
+
+  const formData = new FormData();
+  formData.append("chat_id", chatId);
+  formData.append("photo", photoInput.files[0]);
+  formData.append("caption", caption);
+
+  fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.ok) {
+      messageDiv.style.color = "green";
+      messageDiv.innerText = "Commande envoyée avec succès !";
+
+      // Stocker les données pour la confirmation
+      sessionStorage.setItem("commandeData", JSON.stringify({
+        commandeID,
+        nom,
+        numero,
+        email,
+        pays: paysNom,
+        modePaiement,
+        infoSupp: infoDiv,
+        photoURL: URL.createObjectURL(photoInput.files[0])
+      }));
+
+      form.reset();
+      setTimeout(() => {
+        spinner.style.display = "none";
+        window.location.href = "confirmation.html";
+      }, 3000);
+    } else {
+      messageDiv.innerText = "Erreur lors de l'envoi : " + data.description;
+      spinner.style.display = "none";
+      btn.disabled = false;
+      btn.style.opacity = 1;
+    }
+  })
+  .catch(err => {
+    console.error("Erreur réseau :", err);
+    messageDiv.innerText = "Erreur réseau lors de l'envoi.";
+    spinner.style.display = "none";
+    btn.disabled = false;
+    btn.style.opacity = 1;
+  });
+});
+</script>
+
+
+
+
+</body>
+</html>
